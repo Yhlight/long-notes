@@ -1,0 +1,37 @@
+name: Yhlight_Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v4.0.2
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+          ~/.npm
+          node_modules
+        # An explicit key for restoring and saving the cache
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        # An ordered list of keys to use for restoring stale cache if no cache hit occurred for key
+        restore-keys: |
+          ${{ runner.os }}-node-
+          ${{ runner.os }}-
+          node-
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
