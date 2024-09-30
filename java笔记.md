@@ -70,8 +70,9 @@ del + *.后缀
 
 ## JAVA开发环境的搭建
 #### JKD的安装（自行选版本）
-https://www.oracle.com/cn/java/technologies/downloads/
-进入这个链接后，你可以选择安装高版本JAVA，也可以选择安装JAVA 8
+https://www.oracle.com/cn/java/technologies/downloads/  
+进入这个链接后，你可以选择安装高版本JAVA，也可以选择安装JAVA 8  
+需要下载的是Windows版本
 [![pA3VG0U.png](https://s21.ax1x.com/2024/09/30/pA3VG0U.png)](https://imgse.com/i/pA3VG0U)  
 
 如果你想要安装JAVA 8，请继续往下浏览页面
