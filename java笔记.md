@@ -37,15 +37,18 @@ cd + /或\
 
 7. 跨盘符访问
 cd + /d + 其他盘符目录
-例如：cd /d E:\yhlight\yh-phobos-master
+例如：cd /d E:\yhlight\yh-phobos-master  
 
 #### 创建与删除
-1. 创建指定的文件目录
+1. 创建
 md + 文件目录名
+md + 某文件
 例如：md \Users\yingh\yinghuolight  
 
-2. 删除指定的文件目录
-rd + 文件目录名  
+2. 删除
+rd + 文件目录名
+rd + 某文件
+例如：rd xxx.txt  
 
 #### 其他操作
 1. 清屏
@@ -53,3 +56,23 @@ cls
 
 2. 退出命令行窗口
 exit  
+
+3. 调用前后使用过的指令
+↑ ↓（键盘按键）  
+
+4. 删除
+del + 文件目录名
+del + 某文件  
+
+5. 删除同后缀名文件
+del + *.后缀
+例如：del *.txt  
+
+## JAVA开发环境的搭建
+#### JKD的安装（自行选版本）
+https://www.oracle.com/cn/java/technologies/downloads/
+进入这个链接后，你可以选择安装高版本JAVA，也可以选择安装JAVA 8
+[![pA3VG0U.png](https://s21.ax1x.com/2024/09/30/pA3VG0U.png)](https://imgse.com/i/pA3VG0U)  
+
+如果你想要安装JAVA 8，请继续往下浏览页面
+[![pA3V8mT.png](https://s21.ax1x.com/2024/09/30/pA3V8mT.png)](https://imgse.com/i/pA3V8mT)  
