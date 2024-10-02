@@ -176,7 +176,7 @@ java HelloChina
 明显，这繁琐许多，同时，不仅仅是这些问题，这里进行相关的一些解析  
 1. pubilc类一致性需求
 你可以看到，上面的代码是class + 类名，然而，在Java中，更多使用的是pubilc class + 类名  
-在Java中规定，pubild class 的**类名**要和**文件名**完全相同  
+在Java中规定，pubilc class 的**类名**要和**文件名**完全相同  
 
 2. 组织性，IDE支持，避免冲突等的需求  
 
