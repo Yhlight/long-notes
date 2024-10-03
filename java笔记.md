@@ -1,3 +1,8 @@
+# 严格说明
+1. **在编程中，严格区分中英文字符，请自行安装一个英语输入法**  
+2. **如果你有学习过其他语言，请不要吝啬你的学识，进行一定程度的迁移运用**  
+3. **此篇笔记不会记录计算机基础知识**  
+
 ## 常见的DOS命令
 WIN+R唤起运行窗口，输入CMD，打开CMD窗口  
 
@@ -149,7 +154,7 @@ Java文件是如何编写和运行的？
 
 你只需要右键新建一个txt，然后更改为java后缀的文件，再进行编写就可以了，注意，要打开显示扩展名，否则无法进行后缀的更改  
 
-然后使用javac命令将java文件进行编译，生成class文件  
+然后使用javac命令将java文件进行编译，生成class（字节码文件）文件  
 
 接着使用java命令运行生成的class文件  
 
@@ -162,7 +167,7 @@ class HelloWorld {
     }
 }
 ~~~
-这就是打印HelloWorld需要的代码，class后面接的HelloWorld就是**类**的名字，你可以随意修改，但是最好是和文件名字相同  
+这就是打印HelloWorld需要的代码，注意，Java代码是严格区分**大小写**的，class后面接的HelloWorld就是**类**的名字，你可以随意修改，但是最好是和文件名字相同  
 
 举个例子  
 文件名字 HelloWorld.java  
@@ -172,11 +177,11 @@ javac HelloWorld.java
 生成的class是HelloChina.class  
 
 java HelloChina  
-运行需要输入类的名字，而不是文件名字  
+运行需要输入类的名字（要完全相同），而不是文件名字  
 明显，这繁琐许多，同时，不仅仅是这些问题，这里进行相关的一些解析  
-1. pubilc类一致性需求
-你可以看到，上面的代码是class + 类名，然而，在Java中，更多使用的是pubilc class + 类名  
-在Java中规定，pubilc class 的**类名**要和**文件名**完全相同  
+1. public类一致性需求  
+你可以看到，上面的代码是class + 类名，然而，在Java中，更多使用的是public class + 类名  
+在Java中规定，public class 的**类名**要和**文件名**完全相同  
 
 2. 组织性，IDE支持，避免冲突等的需求  
 
@@ -204,3 +209,95 @@ java HelloWorld
 >chcp 65001  
 3. 运行java时设置编码  
 >java -Dfile.encoding=UTF-8 HelloWorld  
+
+##### 打印HelloWorld代码相关补充
+**公共类的使用**  
+~~~
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("HelloWorld");
+    }
+}
+~~~
+
+**println与print**  
+System.out.println("HelloWorld");  
+println 输出数据后**进行**换行  
+
+System.out.print("HelloWorld");  
+print 输出数据之后**不进行**换行  
+
+**一个文件多个类**  
+一个文件允许有多个类，但只允许一个存在一个**公共类**，同时，类之间不能同名  
+~~~
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("HelloWorld");
+    }
+}
+
+class HelloJava {
+
+    }
+
+class HelloAlice {
+
+    }
+~~~
+
+****
+
+## 注释
+#### 单行注释 //
+用来解释单行代码或使某部分代码不被编译器读取  
+// 后面跟的内容不会被编译器读取  
+
+#### 多行注释
+/*          */  两个符号间的代码全部被注释  
+如下  
+~~~
+/*
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("HelloWorld");
+    }
+}
+*/
+~~~
+
+#### 文档注释（java独有）
+~~~
+/**
+
+*/
+~~~
+文档注释内容可以被JDK提供的工具javadoc所解析，生成一套以网页文件形式体现的该程序的说明文档。  
+
+文档注释是用来生成一套网页的介绍信息  
+例如  
+~~~
+/**
+我的首个java程序
+@author yinghuolight
+@version 1.0
+*/
+
+public class HelloWorld {
+    /**
+    这是main方法，一个文件仅此一个
+    */
+    public static void main(String[] args) {
+        System.out.println("HelloWorld");
+    }
+}
+~~~
+
+使用cmd来生成需要使用以下指令  
+>javadoc -d mydoc -author -version HelloWorld.java  
+
+mydoc是生成的文件夹名字，随意更改  
+这指令只是包括了两个常用的参数，还有很多参数需要自行去探索   
+可以尝试使用idea去生成doc文件  
+
+***
+## JAVA API文档
