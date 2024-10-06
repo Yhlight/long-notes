@@ -74,7 +74,7 @@ del + *.后缀
 例如：del *.txt  
 
 ## JAVA开发环境的搭建
-#### JKD的安装（自行选版本）
+### JKD的安装（自行选版本）
 https://www.oracle.com/cn/java/technologies/downloads/  
 进入这个链接后，你可以选择安装高版本JAVA，也可以选择安装JAVA 8  
 需要下载的是Windows版本
@@ -83,10 +83,10 @@ https://www.oracle.com/cn/java/technologies/downloads/
 如果你想要安装JAVA 8，请继续往下浏览页面
 [![pA3V8mT.png](https://s21.ax1x.com/2024/09/30/pA3V8mT.png)](https://imgse.com/i/pA3V8mT)  
 
-#### 路径相关的配置（必要）
+### 路径相关的配置（必要）
 JAVA可以安装在任意一个盘，只不过更推荐安装在系统盘，安装在系统盘可以避免很多问题，没必要为了担心一些微不足道的问题而安装在其他盘，具体自行选择  
 
-##### JAVA目录的简单认识
+### JAVA目录的简单认识
 **bin**  
 这个文件夹放着开发工具，这也是为什么编译与运行java文件要放进bin文件  
 
@@ -113,7 +113,7 @@ JAVA可以安装在任意一个盘，只不过更推荐安装在系统盘，安�
 
 ***
 
-#### 配置Path环境变量
+### 配置Path环境变量
 **什么是Path环境变量?**  
 Path环境变量是window操作系统执行命令时，所要搜寻的路径  
 
@@ -127,7 +127,7 @@ java test
 需要这样才可以正常运行  
 这样对开发很麻烦，肯定是不希望每次都要把java文件丢进bin目录之中再进行运行  
 
-##### 如何配置Path环境变量?
+#### 如何配置Path环境变量?
 右键此电脑，属性，高级系统设置，环境变量  
 此电脑可以在打开任意一个目录后，在左侧的总览目录中找到  
 
@@ -248,11 +248,11 @@ class HelloAlice {
 ****
 
 ## 注释
-#### 单行注释 //
+### 单行注释 //
 用来解释单行代码或使某部分代码不被编译器读取  
 // 后面跟的内容不会被编译器读取  
 
-#### 多行注释
+### 多行注释
 /*          */  两个符号间的代码全部被注释  
 如下  
 ~~~
@@ -265,7 +265,7 @@ public class HelloWorld {
 */
 ~~~
 
-#### 文档注释（java独有）
+### 文档注释（java独有）
 ~~~
 /**
 
@@ -273,7 +273,7 @@ public class HelloWorld {
 ~~~
 文档注释内容可以被JDK提供的工具javadoc所解析，生成一套以网页文件形式体现的该程序的说明文档。  
 
-文档注释是用来生成一套网页的介绍信息  
+文档注释可以用来生成一套网页的介绍信息  
 例如  
 ~~~
 /**
@@ -284,7 +284,7 @@ public class HelloWorld {
 
 public class HelloWorld {
     /**
-    这是main方法，一个文件仅此一个
+    这是main方法，一个类可以有多个方法
     */
     public static void main(String[] args) {
         System.out.println("HelloWorld");
@@ -301,3 +301,116 @@ mydoc是生成的文件夹名字，随意更改
 
 ***
 ## JAVA API文档
+API是Java提供的基本编程接口  
+Java提供了大量的基础类，可以通过API文档来查阅  
+
+API地址：https://docs.oracle.com/en/java/javase/22/docs/api/index.html  
+
+这里拿的是java22来作为实例，你可以更换22为其他数字以查阅其他版本的API  
+
+也可以通过这个链接来到总览页面 https://docs.oracle.com/en/java/javase  
+
+***
+### 学前实例
+#### 输出个人信息
+~~~
+public class Introduction {
+    public static void main(String[] args) {
+        System.out.println("姓名：展扬呀");
+        System.out.println();
+        System.out.println("家里蹲大学在读生，负责文案及相关程序");
+        System.out.println("第一次席");
+    }
+}
+~~~
+
+***
+
+## 第一大章 变量与运算符
+### 标识符
+#### 何为标识符
+Java中变量、方法、类等要素命名时使用的字符序列，称为标识符  
+
+#### 标识符命名准则
+1. 由26个英文字母大小写，0-9，或$组成  
+2. 数字不可以作为开头  
+3. 不可以使用关键字和保留字，但能包含关键字和保留字  
+4. 严格区分大小写，长度无限制  
+5. 不能包括空格  
+
+#### 标识符命名规范
+包名：多单词组成时所有字母都小写  
+例如: java.lang，com.atguigu.bean  
+
+类名、接口名：多单词组成时，所有单词的首字母大写  
+例如: HelloWorld，String，System  
+
+变量名、方法名：多单词组成时，第一个单词首字母小写，第二个单词开始每个单词首字母大写  
+例如: age，name，bookName，main，binarySearch，getName  
+
+常量名：所有字母都大写，多单词时每个单词用下划线连接  
+例如: MAX_VALUE，PI，DEFAULT_CAPACITY  
+
+### 变量
+#### 变量的类型
+##### 基本数据类型
+整型  
+1. byte  
+2. short  
+3. int  
+4. long  
+
+浮点型  
+1. float  
+2. double  
+
+字符型  
+1. char  
+
+布尔型  
+1. boolean  
+
+##### 引用数据类型
+类（class）  
+数组（array）  
+接口（interface）  
+枚举（enum）  
+注解（annotation）  
+记录（record）  
+
+#### 定义变量的细则和规范
+变量：内存中的一个存储区域，该区域的数据可以在同一类型范围内不断变化  
+变量的三个要素：数据类型，变量名，存储的值  
+变量的声明：数据类型 变量名 = 变量值  
+变量的意义：给一段指定的内存起名，方便操作这段内存  
+
+局部变量：方法内部定义的变量  
+全局变量：方法之外定义的变量  
+
+作用域：变量的作用范围  
+简单来说就是变量所在的大括号范围  
+在这个大括号内变量可以使用  
+全局变量的作用域是当前文件  
+
+~~~
+public class Test {
+    public static void main(String[] args) {
+        int i;
+        i = 40;
+        int j;
+        j = i + 40;
+        int sum = i + j;
+        char a = 'A';
+        System.out.println(i + j);
+        System.out.println("i + j = " + sum);
+        System.out.println(a);
+        //System.out.printf("%d", i);
+    }
+}
+~~~
+
+##### 定义变量的细则
+1. 变量必须要先进行声明再进行使用  
+2. 局部变量在使用之前一定要进行初始化  
+3. 变量都有它们的作用域，出了作用域范围后无法使用  
+4. 变量都有相应的范围，不要跃出范围  
