@@ -414,3 +414,97 @@ public class Test {
 2. 局部变量在使用之前一定要进行初始化  
 3. 变量都有它们的作用域，出了作用域范围后无法使用  
 4. 变量都有相应的范围，不要跃出范围  
+
+#### 基本数据类型的介绍
+**整数类型：byte，short，int，long**  
+
+|类型|占用存储空间|范围|
+|:-:|:-:|:-:|
+|byte|1个字节（8个bit）|-128 ~ 127|
+|short|2个字节|-2^15 ~ 2^15-1|
+|int|4个字节|-2^31 ~ 2^31-1|
+|long|8个字节|-2^63 ~ 2^63-1|
+
+定义long类型的变量，赋值时要以"l"或者"L"作为后缀  
+Java程序中变量通常声明为int类型，除非范围不够  
+Java的整型默认为int型  
+
+##### 计算机的存储单位
+**字节（byte）** 计算机用于计量存储容量的基本单位，一个字节等于8个bit  
+**位（比特位/bit）** 数据存储的最小单位  
+
+**浮点类型：float，double**  
+|类型|占用存储空间|范围|
+|:-:|:-:|:-:|
+|单精度float|4个字节|-3.403E38 ~ 3.403E38|
+|双精度double|8个字节|-1.798E308 ~ 1.798E308|
+
+浮点型有两种表现形式：  
+十进制数：5.12，512.0f，.512  
+科学计数法：5.12e2，512E2，100E-2  
+
+float尾数可以精确到7位有效数字，在很多情况下，精度很难满足  
+double精度是float的两倍（double的精度约为15-16位）  
+
+定义float类型的变量，赋值要需要以"f"或"F"作为后缀  
+Java的浮点型默认为double类型  
+
+##### 浮点数精度的说明
+并不是所有的小数都能精确地用二进制浮点数表示，例如10的负次幂  
+
+浮点类型float，double并不适应于**不容许舍入误差**的金融计算，对于需要精确数字计算或者保留特定位数的精度，需要用**BigDecimal**类  
+
+一些精度相关的实例说明  
+这个例子大多数语言都是一样的，不信去试试  
+~~~
+public class Test {
+    public static void main(String[] arg) {
+        System.out.println(0.1 + 0.2);
+    }
+}
+~~~
+
+***
+
+~~~
+public class Test {
+    public static void main(String[] arg) {
+        float ff1 = 123123123f;
+        float ff2 = ff1 + 1;
+        System.out.println(ff1);
+        System.out.println(ff2);
+        System.out.println(ff1 == ff2);
+    }
+}
+~~~
+
+##### 浮点型实例
+定义圆周率并赋值为3.14，现在有三个圆的半径为1.2，2.5，6，求它们的面积  
+~~~
+public class FloatDoubleExer {
+    public static void main(String[] arg) {
+        double pi = 3.14;
+        double r1 = 1.2;
+        double r2 = 2.5;
+        double r3 = 6.0;
+        double s1 = pi * r1 * r1;
+        double s2 = pi * r2 * r2;
+        double s3 = pi * r3 * r3;
+        System.out.println("圆1的面积为" + s1 + " 圆2的面积为" + s2 + " 圆3的面积为" + s3);
+    }
+}
+~~~
+如果可以，请使用单词代替r1，s1  
+
+将华氏温度(80度)转换为摄氏度，并以华氏度和摄氏度为单位分别显示该温度  
+**℃=(℉ - 32) / 1.8**  
+~~~
+public class FloatDoubleExer {
+    public static void main(String[] arg) {
+        double degreeFahrenheit = 80.0;
+        double degreeCentigrade = (degreeFahrenheit - 32) / 1.8;
+        System.out.println("华氏温度为" + degreeFahrenheit + "℉");
+        System.out.println("摄氏温度为" + degreeCentigrade + "℃");
+    }
+}
+~~~

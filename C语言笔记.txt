@@ -7,6 +7,10 @@
 3.vs组件
 C++桌面开发，C++游戏开发（非工作室的不用管）
 
+相关教学视频链接：
+【C语言编程2024C语言零基础视频教程C语言入门初学者小白C语言考研C语言专升本C语言期末考试不挂科C语言程序设计C语言黑马二级考试突击C语言视频教程谭浩强）】 
+https://www.bilibili.com/video/BV1cq4y1U7sg/?share_source=copy_web&vd_source=973cddc40f85d57f3463fcbd0d6af605
+
 //////////////////////////////////////////////////////////////
 
 
@@ -115,6 +119,8 @@ long //长整型
 long long //更长的整形
 float //单精度浮点数
 double //双精度浮点数
+
+float类型的变量赋值时，要带上"f"后缀，这是一个好习惯
 
 有无符号
 signed 修饰的数据类型有符号
@@ -4446,7 +4452,7 @@ int main()
 这一种在绝大多数编译器是可以完成任务，然而，这种写法是要避免的
 从内存空间上来说
 [-2][-1][0][1][2][3][4]
-  ↑      <-      ↑
+    ↑  <-       ↑
 可以看到，指针p已经越界访问了，构成了非法访问
 数组在内存中的存放是连续的，你可以将一个空间的末端视作另一个空间的起端
 这就可以解释为什么会到达[-2]空间了
@@ -4624,6 +4630,42 @@ int main()
 {
 	char arr[] = "HelloWorld";
 	reverse(arr);
+	printf("%s\n", arr);
+	return 0;
+}
+这里说明一下，为什么不用sizeof，而用strlen
+这个数组指向的是一个字符串，和平时不同
+strlen是一个函数实现的功能，运行结束的标志是"\0"
+而sizeof是一个操作符，计算大小会包括"\0"
+然而这不是重点，无非就是sizeof进行减一
+而是这里使用了函数，函数需要传入参数和接收参数
+sizeof要写在外边且要传入函数，使代码空间利用率降低了
+如果你想使用sizeof，你需要写成这样sizeof(arr) / sizeof(arr[0]) - 1
+具体看下面代码
+#include <stdio.h>
+#include <assert.h>
+#include <string.h>
+
+void reverse(char* p, int len)
+{
+	assert(p != NULL);
+	char* left = p;
+	char* right = p + len - 1;
+	while (left < right)
+	{
+		char tmp = *left;
+		*left = *right;
+		*right = tmp;
+		left++;
+		right--;
+	}
+}
+
+int main()
+{
+	char arr[] = "HelloWorld";
+	int len = sizeof(arr) / sizeof(arr[0]) - 1;
+	reverse(arr, len);
 	printf("%s\n", arr);
 	return 0;
 }
@@ -5679,6 +5721,141 @@ int main()
 
 运行时错误
 借助调试，逐步定位问题
+
+调试的综合练习
+写一个函数，使整型数组中的奇数置于左侧，偶数置于右侧
+#include <stdio.h>
+
+void move(int arr[], int size)
+{
+	int left = 0;
+	int right = size - 1;
+	while (left < right)
+	{
+		while ((left < right) && (arr[left] % 2 == 1))
+		{
+			left++;
+		}
+
+		while ((left < right) && (arr[right] % 2 == 0))
+		{
+			right--;
+		}
+
+		if (left < right)
+		{
+			int tmp = arr[left];
+			arr[left] = arr[right];
+			arr[right] = tmp;
+		}
+	}
+}
+
+void print(int arr[], int size)
+{
+	int i = 0;
+	for (i = 0; i < size; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+int main()
+{
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	move(arr, size);
+	print(arr, size);
+	return 0;
+}
+
+你已经学过了指针，要学会用指针，上述转变为指针是这样的
+非要说，没必要用指针
+#include <stdio.h>
+
+void move(int* p, int size)
+{
+    int left = 0;
+    int right = size - 1;
+    while (left < right)
+    {
+        while ((left < right) && (*(p + left) % 2 != 0))
+        {
+            left++;
+        }
+
+        while ((left < right) && (*(p + right) % 2 == 0))
+        {
+            right--;
+        }
+		//初始为0 9，进行到left=4，right=5时，left++循环条件仍未结束，继续进行
+		//left=5，left<right不成立，此时right=5
+
+        if (left < right)
+        {
+            int tmp = *(p + left);
+            *(p + left) = *(p + right);
+            *(p + right) = tmp;
+        }
+    }
+
+    for (int i = 0; i < left - 1; i++)
+    {
+        for (int j = 0; j < left - i - 1; j++)
+        {
+            if (*(p + j) > *(p + j + 1))
+            {
+                int tmp = *(p + j);
+                *(p + j) = *(p + j + 1);
+                *(p + j + 1) = tmp;
+            }
+        }
+    }
+	//i=0 i<4 j=0 j<4 j进行4次
+	//i=1 i<4 j=0 j<3 j进行3次
+	//i=2 i<4 j=0 j<2 j进行2次
+	//i=3 i<4 j=0 j<1 j进行1次
+	//i=4 满足条件，不进行
+	//就是说，数组前5位会进行位置的调整（p + j + 1)
+
+    for (int i = left; i < size - 1; i++)
+    {
+        for (int j = left; j < size - i + left - 1; j++)
+        {
+            if (*(p + j) > *(p + j + 1))
+            {
+                int tmp = *(p + j);
+                *(p + j) = *(p + j + 1);
+                *(p + j + 1) = tmp;
+            }
+        }
+    }
+	//i=5 i<9 j=5 j<9 j进行4次
+	//i=6 i<9 j=5 j<8 j进行3次
+	//i=7 i<9 j=5 j<7 j进行2次
+    //i=8 i<9 j=5 j<6 j进行1次
+	//i=9 满足条件，不进行
+	//就是说，数组后5位会进行位置的调整（p + j + 1)
+}
+
+void print(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int arr[] = { 1,4,7,0,2,3,5,6,8,9 };
+    int size = sizeof(arr) / sizeof(arr[0]);
+    move(arr, size);
+    print(arr, size);
+    return 0;
+}
 
 //////////////////////////////////////////////////////////////
 
