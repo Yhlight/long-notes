@@ -160,13 +160,13 @@ Java文件是如何编写和运行的？
 
 ##### HelloWorld的打印
 将txt命名为HelloWorld.java，注意HelloWorld只是一个名字，可以任意更换，但是需要和代码之中的 **类（class）** 的名字相同，具体往下看  
-~~~
+```
 class HelloWorld {
     public static void main(String[] args) {
         System.out.println("HelloWorld");
     }
 }
-~~~
+```
 这就是打印HelloWorld需要的代码，注意，Java代码是严格区分**大小写**的，class后面接的HelloWorld就是**类**的名字，你可以随意修改，但是最好是和文件名字相同  
 
 举个例子  
@@ -206,19 +206,19 @@ java HelloWorld
 你可以通过以下方法进行更改  
 1. 记事本另存为时，更改文件的字符编码  
 2. 设置cmd字符编码  
->chcp 65001  
-3. 运行java时设置编码  
->java -Dfile.encoding=UTF-8 HelloWorld  
+`chcp 65001`
+1. 运行java时设置编码  
+`java -Dfile.encoding=UTF-8 HelloWorld`
 
 ##### 打印HelloWorld代码相关补充
 **公共类的使用**  
-~~~
+```
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("HelloWorld");
     }
 }
-~~~
+```
 
 **println与print**  
 System.out.println("HelloWorld");  
@@ -229,7 +229,7 @@ print 输出数据之后**不进行**换行
 
 **一个文件多个类**  
 一个文件允许有多个类，但只允许一个存在一个**公共类**，同时，类之间不能同名  
-~~~
+```
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("HelloWorld");
@@ -243,7 +243,7 @@ class HelloJava {
 class HelloAlice {
 
     }
-~~~
+```
 
 ****
 
@@ -255,7 +255,7 @@ class HelloAlice {
 ### 多行注释
 /*          */  两个符号间的代码全部被注释  
 如下  
-~~~
+```
 /*
 public class HelloWorld {
     public static void main(String[] args) {
@@ -263,19 +263,19 @@ public class HelloWorld {
     }
 }
 */
-~~~
+```
 
 ### 文档注释（java独有）
-~~~
+```
 /**
 
 */
-~~~
+```
 文档注释内容可以被JDK提供的工具javadoc所解析，生成一套以网页文件形式体现的该程序的说明文档。  
 
 文档注释可以用来生成一套网页的介绍信息  
 例如  
-~~~
+```
 /**
 我的首个java程序
 @author yinghuolight
@@ -290,7 +290,7 @@ public class HelloWorld {
         System.out.println("HelloWorld");
     }
 }
-~~~
+```
 
 使用cmd来生成需要使用以下指令  
 >javadoc -d mydoc -author -version HelloWorld.java  
@@ -313,7 +313,7 @@ API地址：https://docs.oracle.com/en/java/javase/22/docs/api/index.html
 ***
 ### 学前实例
 #### 输出个人信息
-~~~
+```
 public class Introduction {
     public static void main(String[] args) {
         System.out.println("姓名：展扬呀");
@@ -322,7 +322,7 @@ public class Introduction {
         System.out.println("第一次席");
     }
 }
-~~~
+```
 
 ***
 
@@ -392,7 +392,7 @@ Java中变量、方法、类等要素命名时使用的字符序列，称为标�
 在这个大括号内变量可以使用  
 全局变量的作用域是当前文件  
 
-~~~
+```
 public class Test {
     public static void main(String[] args) {
         int i;
@@ -407,7 +407,7 @@ public class Test {
         //System.out.printf("%d", i);
     }
 }
-~~~
+```
 
 ##### 定义变量的细则
 1. 变量必须要先进行声明再进行使用  
@@ -456,17 +456,17 @@ Java的浮点型默认为double类型
 
 一些精度相关的实例说明  
 这个例子大多数语言都是一样的，不信去试试  
-~~~
+```
 public class Test {
     public static void main(String[] arg) {
         System.out.println(0.1 + 0.2);
     }
 }
-~~~
+```
 
 ***
 
-~~~
+```
 public class Test {
     public static void main(String[] arg) {
         float ff1 = 123123123f;
@@ -476,11 +476,11 @@ public class Test {
         System.out.println(ff1 == ff2);
     }
 }
-~~~
+```
 
 ##### 浮点型实例
 定义圆周率并赋值为3.14，现在有三个圆的半径为1.2，2.5，6，求它们的面积  
-~~~
+```
 public class FloatDoubleExer {
     public static void main(String[] arg) {
         double pi = 3.14;
@@ -493,12 +493,12 @@ public class FloatDoubleExer {
         System.out.println("圆1的面积为" + s1 + " 圆2的面积为" + s2 + " 圆3的面积为" + s3);
     }
 }
-~~~
+```
 如果可以，请使用单词代替r1，s1  
 
 将华氏温度(80度)转换为摄氏度，并以华氏度和摄氏度为单位分别显示该温度  
 **℃=(℉ - 32) / 1.8**  
-~~~
+```
 public class FloatDoubleExer {
     public static void main(String[] arg) {
         double degreeFahrenheit = 80.0;
@@ -507,4 +507,26 @@ public class FloatDoubleExer {
         System.out.println("摄氏温度为" + degreeCentigrade + "℃");
     }
 }
-~~~
+```
+
+#### 字符类型
+char类型数据用来表示存储并表示字符，占用两个字节  
+Java中所有字符都使用Unicode编码，故一个字符可以存储一个字母，汉字，或符号  
+
+字符型变量一般有三种表现形式  
+1.使用单引号('')括起来的单个字符  
+例如：  
+```
+char c1 = 'a';
+char c2 = '中';
+char c3 = '9';
+```
+
+2.直接使用Unicode值（\uXXXX）来表示字符型常量  
+XXXX表示一个十六进制整数  
+
+3.Java允许使用转义字符'\'来将字符转变成特殊字符型常量  
+`char c3 = '\n';  //\n表示换行`
+人话就是转义字符  
+
+4.ASCII码
