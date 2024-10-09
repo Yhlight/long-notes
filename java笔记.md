@@ -3,6 +3,11 @@
 2. **如果你有学习过其他语言，请不要吝啬你的学识，进行一定程度的迁移运用**  
 3. **此篇笔记不会记录计算机基础知识**  
 
+# IDEA常用快捷键
+1. **CTRL+ALT+L  文件格式化（自动对齐等功能）**
+2. **CTRL+/  行注释**
+3. **SHIFT+F10  编译**
+
 ## 常见的DOS命令
 WIN+R唤起运行窗口，输入CMD，打开CMD窗口  
 
@@ -148,7 +153,7 @@ java test
 ***
 
 ## Java学习篇
-#### 你的第一个程序-打印HelloWorld
+### 你的第一个程序-打印HelloWorld
 Java文件是如何编写和运行的？  
 首先，你需要通过记事本等文件软件来写Java代码，这里推荐使用[visula studio code](https://code.visualstudio.com/)  
 
@@ -158,7 +163,7 @@ Java文件是如何编写和运行的？
 
 接着使用java命令运行生成的class文件  
 
-##### HelloWorld的打印
+### HelloWorld的打印
 将txt命名为HelloWorld.java，注意HelloWorld只是一个名字，可以任意更换，但是需要和代码之中的 **类（class）** 的名字相同，具体往下看  
 ```
 class HelloWorld {
@@ -210,7 +215,7 @@ java HelloWorld
 1. 运行java时设置编码  
 `java -Dfile.encoding=UTF-8 HelloWorld`
 
-##### 打印HelloWorld代码相关补充
+#### 打印HelloWorld代码相关补充
 **公共类的使用**  
 ```
 public class HelloWorld {
@@ -332,7 +337,7 @@ public class Introduction {
 Java中变量、方法、类等要素命名时使用的字符序列，称为标识符  
 
 #### 标识符命名准则
-1. 由26个英文字母大小写，0-9，或$组成  
+1. 由26个英文字母大小写，0-9，_或$组成  
 2. 数字不可以作为开头  
 3. 不可以使用关键字和保留字，但能包含关键字和保留字  
 4. 严格区分大小写，长度无限制  
@@ -513,7 +518,7 @@ public class FloatDoubleExer {
 char类型数据用来表示存储并表示字符，占用两个字节  
 Java中所有字符都使用Unicode编码，故一个字符可以存储一个字母，汉字，或符号  
 
-字符型变量一般有三种表现形式  
+字符型变量一般有四种表现形式  
 1.使用单引号('')括起来的单个字符  
 例如：  
 ```
@@ -530,3 +535,155 @@ XXXX表示一个十六进制整数
 人话就是转义字符  
 
 4.ASCII码
+
+#### 布尔类型
+boolean类型用来判断逻辑条件  
+
+一般用于这些场景  
+1. if条件  
+2. while循环  
+3. for循环  
+4. do while循环  
+
+boolean类型数据只有两个值：true或flase  
+不可以使用0或非0的整数代替，这和C语言不同  
+
+扩展：Java虚拟机中没有任何供booleamn值专用的字节码文件，在虚拟机中会把true和flase认为成int替代的整数，即0/1  
+
+```
+public class Test {
+    public static void main(String[] arg) {
+        boolean isMarried = true;
+        if (isMarried) {
+            System.out.println("不可忘却的时刻");
+        } else {
+            System.out.println("友谊常在");
+        }
+    }
+}
+```
+
+#### 基础数据类型运算规则
+基础数据类型变量间运算存在着一定的运算规则  
+其中包括：  
+1.类型提升  
+2.强制类型转换  
+
+##### 类型提升
+当容量小的变量与容量大的变量做运算时，结果自动转换为容量大的数据类型  
+这个容量指的是范围大小，而不是占用的内存大小  
+```
+public class VariableTest {
+    public static void main(String[] arg) {
+        int i1 = 10;
+        int i2 = i1;
+        long l1 = i1;
+        float f1 = l1;
+    }
+}
+```
+
+`byte,char,short -> int -> long -> float -> double`
+
+char类型之间运算照样会进行类型提升  
+如果你的赋值操作超出原类型范围，不会发生类型提升  
+例如：  
+long test1 = 123123123123;  
+123123123123没有'l'或'L'的后缀，这是int类型，按照原情况，会发生类型提升，转换成long类型，但由于这个值超出了int类型的范围，所以发生报错，没有发生类型提升，float类型不写后缀不会自动类型提升，因为浮点数默认double类型  
+
+整型常量默认为int类型  
+浮点型常量默认为double类型  
+
+#### 强制类型转换
+有什么办法让范围大的类型的转变成范围小的类型？  
+这个时候需要用到强制类型转换
+`int i1 = (int) 3.14;`
+
+##### 精度损失
+强制类型转换有可能造成精度损失  
+好比如浮点型转成整型会丢掉小数部分，这个措施叫截断  
+
+以下情况会发生精度损失  
+1. 浮点型转换整型  
+2. 转换的类型范围过小  
+```
+int i1 = 128;
+byte b1 = (byte) i1;
+```
+byte的范围是-128 ~ 127  
+那么最终输出结果是多少？  
+-128，最终输出结果是-128  
+至于为什么，那就要了解原码反码补码（自己去了解）了  
+
+首先，i1是int类型，int类型占用4个字节  
+那么它的二进制表示形式是  
+00000000000000000000000010000000  
+
+而byte占用1个字节  
+它的二进制形式只有8位  
+只能存储10000000  
+
+内存中存放的是补码，打印或显示在屏幕上的是原码  
+这里面就需要补码向原码进行转换  
+补码等于原码取反+1，然而，对于8个二进制位的10000000来说  
+得碍于符号位不参与运算，无法进行补码向原码进行转换  
+于是计算机定义8位二进制10000000为-128  
+这就是为什么最终输出结果是-128  
+
+等学到后面自然就知道了，这里只是简单说明  
+
+### String类
+String不属于基本数据类型，属于引用数据类型  
+
+`String s1 = "字符串";`
+
+字符串：由一个或多个字符组成并被双引号括起来的字符或字符串  
+Java允许字符串为0个字符  
+```
+public class StringTest {
+    public static void main(String[] arg) {
+        String s1="a";
+        String s2="aa";
+        String s3="";
+        String s4="我是展扬";
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+        System.out.println(s4);
+    }
+}
+```
+
+#### String与基本数据类型变量之间的运算
+String与基本数据类型变量都能够进行运算，但String只能与基本数据类型变量进行连接运算，使用"+"表示  
+例如：  
+```
+public class StringTest {
+    public static void main(String[] arg) {
+        int num = 10;
+        boolean b1 = true;
+        String s1 = "我是展扬";
+        String s2 = s1 + b1 + num;
+        System.out.println(s1 + num);
+        System.out.println(s1 + b1 + num);
+        //不允许System.out.println(b1 + num + s1);
+        //这违反了基本数据类型运算规则
+        System.out.println(s2);
+    }
+}
+```
+
+String允许与整型相连接，最终输出字符整型  
+但在实际运用中，有可能需要让字符10恢复为数字10，这需要使用Integer类  
+```
+public class StringTest {
+    public static void main(String[] arg) {
+        int num = 10;
+        String s1 = "";
+        String s2 = s1 + num;
+        System.out.println(s2);
+        //最终输出"10"，字符10
+        int num2 = Integer.parseInt(s2);
+    }
+}
+```

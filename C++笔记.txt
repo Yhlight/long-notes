@@ -174,6 +174,73 @@ double      8字节        15-16位有效数字
 
 float类型的变量赋值时，要带上"f"后缀，这是一个好习惯
 
-C++中，无论是float类型还是double类型
+（区分C语言）C++中，无论是float类型还是double类型
 因为cout输出流的限制，都是显示6位有效数字的输出结果
 想要获取更多的有效数字需要进行额外的配置
+
+字符型
+作用：存储字符
+（区分C语言）C++无法使用char来存储字符串，C++使用string
+
+字符：仅且一个字符组成并被单引号括起来的字符
+'A','c','1','='
+
+如何定义？
+char ch = 'a';
+在C/C++中，char类型占用一个字节
+
+char类型本质上并不是把字符放进了变量里面
+而是将对应的ASCII编码值存储进内存空间
+
+怎么获取ASCII值
+1.上网自己找ASCII表
+
+2.利用强制类型转换获取
+int a = (int)3.14
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	char ch = 'a';
+	cout << (int)ch << endl;
+	return 0;
+}
+
+转义字符（照抄C的，可以跳过）
+例：
+打印一个目录
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	cout << "c:\code\test.c\n" << endl;
+	return 0;
+}
+实际打印结果为c:code  est.c
+原因为\t转义字符的存在
+解决办法为
+	cout << "c:\code\\test.c\n" << endl;
+
+\0  空字符
+\a  引起电脑响铃（蜂鸣）
+\b  空格
+\f  进纸符
+\n  用于换行
+\r  回车
+\t  水平制表符
+\v  垂直制表符
+\'  单引号
+\"  双引号
+\\  \
+\ddd ddd表示1-3个八进制数字 如\130
+这里打印出来的结果是X
+原因是八进制的130转成了十进制，也就是88
+再对应ASCII码值
+
+\xdd  表示两个16进制数字
+这里打印出来的是0
+原因是16进制的130转成了十进制，也就是48
+再对应ASCII码值
