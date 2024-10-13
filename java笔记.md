@@ -77,7 +77,7 @@ del + 某文件
 5. 删除同后缀名文件  
 del + *.后缀  
 例如：del *.txt  
-
+***
 ## JAVA开发环境的搭建
 ### JKD的安装（自行选版本）
 https://www.oracle.com/cn/java/technologies/downloads/  
@@ -211,9 +211,9 @@ java HelloWorld
 你可以通过以下方法进行更改  
 1. 记事本另存为时，更改文件的字符编码  
 2. 设置cmd字符编码  
-`chcp 65001`
+`chcp 65001`  
 1. 运行java时设置编码  
-`java -Dfile.encoding=UTF-8 HelloWorld`
+`java -Dfile.encoding=UTF-8 HelloWorld`  
 
 #### 打印HelloWorld代码相关补充
 **公共类的使用**  
@@ -250,7 +250,7 @@ class HelloAlice {
     }
 ```
 
-****
+***
 
 ## 注释
 ### 单行注释 //
@@ -328,8 +328,6 @@ public class Introduction {
     }
 }
 ```
-
-***
 
 ## 第一大章 变量与运算符
 ### 标识符
@@ -531,7 +529,7 @@ char c3 = '9';
 XXXX表示一个十六进制整数  
 
 3.Java允许使用转义字符'\'来将字符转变成特殊字符型常量  
-`char c3 = '\n';  //\n表示换行`
+`char c3 = '\n';  //\n表示换行`  
 人话就是转义字符  
 
 4.ASCII码
@@ -584,7 +582,7 @@ public class VariableTest {
 }
 ```
 
-`byte,char,short -> int -> long -> float -> double`
+`byte,char,short -> int -> long -> float -> double`  
 
 char类型之间运算照样会进行类型提升  
 如果你的赋值操作超出原类型范围，不会发生类型提升  
@@ -598,7 +596,7 @@ long test1 = 123123123123;
 #### 强制类型转换
 有什么办法让范围大的类型的转变成范围小的类型？  
 这个时候需要用到强制类型转换
-`int i1 = (int) 3.14;`
+`int i1 = (int) 3.14;`  
 
 ##### 精度损失
 强制类型转换有可能造成精度损失  
@@ -653,7 +651,7 @@ public class AirExer {
 ### String类
 String不属于基本数据类型，属于引用数据类型  
 
-`String s1 = "字符串";`
+`String s1 = "字符串";`  
 
 字符串：由一个或多个字符组成并被双引号括起来的字符或字符串  
 Java允许字符串为0个字符  
@@ -838,10 +836,12 @@ int类型占用空间内存4个字节，即32个bit位，二进制里面每一�
 
 ### 操作符/运算符
 #### 算术操作符  
-"+" "-"  *  /  %  
-加  减   乘 除 取余  
+```
++    -    *    /    %
+加   减   乘   除   取余
+```
 
-前置++  后置++  前置--  后置--  
+`前置++  后置++  前置--  后置--`  
 ++a和a++有着很大区别  
 前后是赋值的先后，++a是先赋值，后使用  
 a++先使用，后赋值  
@@ -855,14 +855,16 @@ int b = a++;
 先使用后赋值，这里b=11，a=11  
 
 #### 位操作符  
-<<         >>  
-左移操作符 右移操作符  
+```
+<<         >>
+左移操作符 右移操作符
 
-&      |      ^  
-按位与 按位或 按位异或  
+&      |      ^
+按位与 按位或 按位异或
 
 ~  
-按位取反  
+按位取反
+```
 位操作符都是对二进制位进行更改  
 左右移，二进制位进行左移右移，n >> 3表示右移三位  
 
@@ -904,7 +906,9 @@ a的结果为1
 按位取反就是0变1，1变0，包括符号位  
 
 #### 赋值操作符  
-=  +=  -=  *=  /=  %=  <<=  >>=  &=  ^=  |=  
+```
+=   +=   -=   *=   /=   %=   <<=   >>=   &=   ^=   |=
+```
 += ^=这类属于复合赋值，具体意思对应上文再结合赋值便可知道  
 例如 int a = 2  a = a + 5 -> a += 5  
 在Java中，+=同样可以被理解成m += 5 -> m = m + 5  
@@ -925,8 +929,10 @@ public class ArbitraryTest {
 让一个数自增推荐选m += 5这种形式  
 
 #### 逻辑运算符  
-&和&&  |和||  !          ^  
-并     或者   逻辑相反    异或  
+```
+&和&&  |和||  !          ^
+并     或者   逻辑相反    异或
+```
 &是逻辑与，左右的表达式都会进行计算  
 &&是短路与，当左侧满足时，右侧不再理会  
 哈？你问为什么要写&&和&，那是因为我一开始压根就没写&  
@@ -947,12 +953,14 @@ public class ArbitraryTest {
 ```
 
 #### 关系运算符  
-==   !=     >    <    >=     <=  
-等于 不等于 大于 小于 大于等 小于等  
+```
+==   !=     >    <    >=     <=
+等于 不等于 大于 小于 大于等 小于等
+```
 Java中，=是赋值，==才是等于  
 
 #### 条件运算符
-(条件表达式)?表达式1:表达式2  
+`(条件表达式)?表达式1:表达式2`  
 条件表达式如果是true，运算结果是表达式1，否则是2  
 
 #### 综合练习
@@ -981,160 +989,7 @@ public class AirExer {
     }
 }
 ```
-
-## 第二章 流程控制
-流程控制语句是用来控制程序中各语句执行顺序的语句，可以把语句组合成能完成一定功能的小逻辑模块  
-程序设计中规定了三种流程结构  
-- 顺序结构  
-从上往下逐个执行，中间没有判断和条状  
-- 分支结构  
-选择性执行某段语句  
-- 循环语句  
-循环执行某段代码  
-
-### 分支语句
-**关键词：if,else,else if**  
-```
-        if (条件表达式) {
-            代码块;
-        } else if (条件表达式) {
-            代码块;
-        } else if (条件表达式) {
-            代码块;
-        } else {
-            代码块;
-        }
-```
-**else if**通常在需要多分支时使用  
-除了**if**可以独立外，其他语句都无法脱离**if**使用  
-
-#### if，else，else if的使用
-if，else if存在着判断条件，如果判断条件成立，执行这一段代码块，其他则是不执行，起到分支的作用  
-
-如果if语句条件成立，那么else if和else都不执行  
-如果if不成立，else if成立，执行else if，其他不执行  
-如果if和多个else if都不成立，执行else  
-实际例子：（这里为了方便提前用了Scanner类）
-成年人心率的正常范围是每分钟60-100次，体检时  
-如果心率不在此范围内，则需要进一步检查  
-```
-import java.util.Scanner;
-
-public class ArbitraryTest {
-    public static void main(String[] args) {
-        int i = 0;
-        Scanner scan = new Scanner(System.in);
-        i = scan.nextInt();
-        if (i >= 60 && i <= 100) {
-            System.out.println("情况正常");
-        } else if (i < 30 || i > 130) {
-            System.out.println("？您？");
-        } else {
-            System.out.println("莫得惊艳点");
-        }
-    }
-}
-```
-上述代码中，if-else结构需要执行的语句就一句，你可以省略大括号  
-```
-        if (i >= 60 && i <= 100)
-            System.out.println("情况正常");
-        else if (i < 30 || i > 130)
-            System.out.println("？您？");
-        else
-            System.out.println("莫得惊艳点");
-```
-我个人建议是加上大括号，除非你这个结构是绝对不会进行更改  
-并且只是简单的逻辑判定，没有用在很复杂的结构  
-if-else的匹配是就近原则，只有在使用大括号时才允许忽略就近原则  
-就近原则就是else默认匹配最近的if  
-
-在多分支选择中 有可能会出现中间值  
-按照日常使用 我们会下意识使用  
-d <= xx < k  
-这种表达是不得当的  
-为什么？  
-<=和<都是二元操作符，也就是只能两个间运算  
-d <= xx已经进行了运算，返回了一个boolean值用来表示是与否  
-这时候表达式就变成boolean < k，Java不允许boolean值与整型运算  
-正确表达应该是  
-xx >= d && xx < k  //&& 并  
-（与C语言不同，C语言是返回常量）  
-
-##### 嵌套使用
-首先要牢记的前提是  
-除了**if**可以独立外，其他语句都无法脱离**if**使用  
-在这里前提下，你可以任意加入if-else结构  
-可以在if中加入if，也可以在else if和else中加入if    
-以一道简单的题目来举例  
-输入三个整数，给他们排序  
-```
-import java.util.Scanner;
-
-public class ArbitraryTest {
-    public static void main(String[] args) {
-        int num1 = 0;
-        int num2 = 0;
-        int num3 = 0;
-        int tmp = 0;
-        Scanner scan = new Scanner(System.in);
-        num1 = scan.nextInt();
-        num2 = scan.nextInt();
-        num3 = scan.nextInt();
-        if (num1 > num2) {
-            tmp = num1;
-            num1 = num2;
-            num2 = tmp;
-            if (num1 > num3) {
-                tmp = num1;
-                num1 = num3;
-                num3 = tmp;
-                if (num2 > num3) {
-                    tmp = num2;
-                    num2 = num3;
-                    num3 = tmp;
-                }
-            }
-        }
-        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
-    }
-}
-```
-实际上，没必要用嵌套的  
-```
-import java.util.Scanner;
-
-public class ArbitraryTest {
-    public static void main(String[] args) {
-        int num1 = 0;
-        int num2 = 0;
-        int num3 = 0;
-        int tmp = 0;
-        Scanner scan = new Scanner(System.in);
-        num1 = scan.nextInt();
-        num2 = scan.nextInt();
-        num3 = scan.nextInt();
-        if (num1 > num2) {
-            tmp = num1;
-            num1 = num2;
-            num2 = tmp;
-        }
-        if (num1 > num3) {
-            tmp = num1;
-            num1 = num3;
-            num3 = tmp;
-        }
-        if (num2 > num3) {
-            tmp = num2;
-            num2 = num3;
-            num3 = tmp;
-        }
-        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
-    }
-}
-```
-在实际开发中，是不会出现超过三层的if-else结构，如果超过了，建议对代码进行更改  
-
+***
 ## Scanner类
 Scanner是官方提供的一个类，用来获取和解析用户输入的数据  
 你可以通过Scanner来获取键盘的输入  
@@ -1145,7 +1000,7 @@ Scanner是官方提供的一个类，用来获取和解析用户输入的数据
 在文件的开头书写，导入Scanner包  
 
 **创建类实例**  
-`Scanner 变量名 = new Scanner(System.in);`
+`Scanner 变量名 = new Scanner(System.in);`  
 
 **调用类方法**  
 如果你需要接收一个字符串，你可以使用next()或nextLine()  
@@ -1195,26 +1050,26 @@ public class ArbitraryTest {
 }
 ```
 **关闭资源**  
-`变量名.close();`
+`变量名.close();`  
 Scanner输入流所输入的内容在运行中是不关闭的  
 这可能会造成内存泄漏，在不需要使用Scanner时，建议关闭它  
 
 ### 如何获取随机数
 随机数的使用是不可缺少的，在Java中可以通过Math类来生成随机数  
-`double 变量名 = Math.random();`
+`double 变量名 = Math.random();`  
 random调用会返回一个[0.0,1.0)范围的double类型的随机数  
 我查阅了JDK 23的API文档，这一句是Math类提供的唯一一条与随机数有关的语句  
 如果你不想使用Math类，也可以使用Random类[java.util.Random](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Random.html#%3Cinit%3E())  
 
 使用Math类生成随机数需要变通一下  
 例如：生成0-100范围的整型随机数  
-`int randomNum = (int) (Math.random() * 101);`
+`int randomNum = (int) (Math.random() * 101);`  
 应该能够理解为什么*101能够得出0-100的范围吧  
 random调用会返回一个[0.0,1.0)范围的double类型的随机数  
 *101就是[0.0,101.0)，转成int类型就是[0,100]，因为101取不到啊  
 
 获取[a,b]范围的通用公式  
-`int 变量名 = (int) (Math.random() * (b - a + 1) + a);`
+`int 变量名 = (int) (Math.random() * (b - a + 1) + a);`  
 
 #### 使用Random类生成随机数
 ```
@@ -1233,6 +1088,283 @@ public class ArbitraryTest {
         Random randomNum = new Random();
         int randomNumNest = (randomNum.nextInt(201) - 100);
         System.out.println(randomNumNest);
+    }
+}
+```
+***
+## 第二章 流程控制
+流程控制语句是用来控制程序中各语句执行顺序的语句，可以把语句组合成能完成一定功能的小逻辑模块  
+程序设计中规定了三种流程结构  
+- 顺序结构  
+从上往下逐个执行，中间没有判断和条状  
+- 分支结构  
+选择性执行某段语句  
+- 循环语句  
+循环执行某段代码  
+
+### 分支语句
+**关键词：if,else,else if,switch**  
+```
+        if (条件表达式) {
+            代码块;
+        } else if (条件表达式) {
+            代码块;
+        } else if (条件表达式) {
+            代码块;
+        } else {
+            代码块;
+        }
+```
+**else if**通常在需要多分支时使用  
+除了**if**可以独立外，其他语句都无法脱离**if**使用  
+
+#### if，else，else if的使用
+if，else if存在着判断条件，如果判断条件成立，执行这一段代码块，其他则是不执行，起到分支的作用  
+
+如果if语句条件成立，那么else if和else都不执行  
+如果if不成立，else if成立，执行else if，其他不执行  
+如果if和多个else if都不成立，执行else  
+实际例子：  
+成年人心率的正常范围是每分钟60-100次，体检时  
+如果心率不在此范围内，则需要进一步检查  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        Scanner scan = new Scanner(System.in);
+        i = scan.nextInt();
+        if (i >= 60 && i <= 100) {
+            System.out.println("情况正常");
+        } else if (i < 30 || i > 130) {
+            System.out.println("？您？");
+        } else {
+            System.out.println("莫得惊艳点");
+        }
+    }
+}
+```
+上述代码中，if-else结构需要执行的语句就一句，你可以省略大括号  
+```
+        if (i >= 60 && i <= 100)
+            System.out.println("情况正常");
+        else if (i < 30 || i > 130)
+            System.out.println("？您？");
+        else
+            System.out.println("莫得惊艳点");
+```
+我个人建议是加上大括号，除非你这个结构是绝对不会进行更改  
+并且只是简单的逻辑判定，没有用在很复杂的结构  
+if-else的匹配是就近原则，只有在使用大括号时才允许忽略就近原则  
+就近原则就是else默认匹配最近的if  
+
+在多分支选择中 有可能会出现中间值  
+按照日常使用 我们会下意识使用  
+d <= xx < k  
+这种表达是不得当的  
+为什么？  
+<=和<都是二元操作符，也就是只能两个间运算  
+d <= xx已经进行了运算，返回了一个boolean值用来表示是与否  
+这时候表达式就变成boolean < k，Java不允许boolean值与整型运算  
+正确表达应该是  
+xx >= d && xx < k  //&& 并  
+然后就是建议条件尽可能写成**左闭右开**的形式  
+能写成x < 10就不要写成x <= 9  
+（与C语言不同，C语言是返回常量）  
+
+##### 嵌套使用
+首先要牢记的前提是  
+除了**if**可以独立外，其他语句都无法脱离**if**使用  
+在这里前提下，你可以任意加入if-else结构  
+可以在if中加入if，也可以在else if和else中加入if    
+以一道简单的题目来举例  
+输入三个整数，给他们排序  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int num1 = 0;
+        int num2 = 0;
+        int num3 = 0;
+        int tmp = 0;
+        Scanner scan = new Scanner(System.in);
+        num1 = scan.nextInt();
+        num2 = scan.nextInt();
+        num3 = scan.nextInt();
+        if (num1 < num2) {
+            tmp = num1;
+            num1 = num2;
+            num2 = tmp;
+            if (num1 < num3) {
+                tmp = num1;
+                num1 = num3;
+                num3 = tmp;
+                if (num2 < num3) {
+                    tmp = num2;
+                    num2 = num3;
+                    num3 = tmp;
+                }
+            }
+        }
+        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
+    }
+}
+```
+实际上，没必要用嵌套的  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int num1 = 0;
+        int num2 = 0;
+        int num3 = 0;
+        int tmp = 0;
+        Scanner scan = new Scanner(System.in);
+        num1 = scan.nextInt();
+        num2 = scan.nextInt();
+        num3 = scan.nextInt();
+        if (num1 < num2) {
+            tmp = num1;
+            num1 = num2;
+            num2 = tmp;
+        }
+        if (num1 < num3) {
+            tmp = num1;
+            num1 = num3;
+            num3 = tmp;
+        }
+        if (num2 < num3) {
+            tmp = num2;
+            num2 = num3;
+            num3 = tmp;
+        }
+        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
+    }
+}
+```
+在实际开发中，是不会出现超过三层的if-else结构，如果超过了，建议对代码进行更改  
+
+#### switch-case结构
+```
+        switch (表达式) {
+            //表达式只能是char，byte，short，int，String，枚举
+            case 常量1:
+                代码块;
+            case 常量2:
+            case 常量3:
+                代码块2;
+            default:
+                代码块;
+            //default是默认，当输入switch的值均不符合分支时
+            //可以设定default分支来回应
+```
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        Scanner scan = new Scanner(System.in);
+        input = scan.nextInt();
+        switch (input) {
+            case 1:
+                System.out.println("第一个分支结果");
+            case 2:
+            case 3:
+                System.out.println("第二个分支结果");
+            default:
+                System.out.println("其他结果");
+        }
+    }
+}
+```
+上述就是一个switch-case结构的简单例子，如果你有运行过  
+你会发现输出结果是全部分支而不是想要的分支结果  
+这个时候需要用到**break**  
+鉴于我switch结构用得少，我不知道什么情况需要输出多个分支  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        Scanner scan = new Scanner(System.in);
+        input = scan.nextInt();
+        switch (input) {
+            case 1:
+                System.out.println("第一个分支结果");
+                break;
+            case 2:
+            case 3:
+                System.out.println("第二个分支结果");
+                break;
+            default:
+                System.out.println("其他结果");
+                break;
+        }
+    }
+}
+```
+**break**可以终止switch语句，**case**相当于switch的入口，决定switch从哪里开始  
+而**break**则是出口，决定从哪里跳出switch，**break**语句并不是必要的  
+你可以不添加**break**以此来输出多个分支结果  
+
+### 循环语句
+关键词：for，while，do...while  
+循环结构有三种：  
+1. for循环  
+2. while循环  
+3. do while循环  
+
+#### for循环
+```
+        for (初始部分; 判断条件; 调整部分) {
+            代码块;
+        }
+```
+初始部分：相当于初始化条件  
+判断条件：循环进行的条件  
+调整部分：每次循环进行什么调整  
+你可以通过下面的例子快速理解：  
+（使用了数组内容知识）  
+```
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        //或者int[] arr = new int[10];
+        for (i = 0; i < 10; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+```
+for循环进行流程是这样的  
+初始部分->判断条件->满足条件->调整部分->判断条件->满足条件->调整部分->判断条件->不满足条件->不进入循环  
+
+值得一提，for循环三个条件可有可无  
+你可以省略初始化部分，也能省略判断条件，三个都省略也是能运行的  
+知道就行，实战还是别乱拿来耍  
+
+来做道题  
+输出1-100间所有偶数的和，同时输出偶数个数  
+```
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        //你可以在初始部分直接定义
+        int count = 0;
+        int sum = 0;
+        for (i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                sum += i;
+                count++;
+            }
+        }
+        System.out.println("偶数之和为" + sum + " 偶数个数为" + count);
     }
 }
 ```
