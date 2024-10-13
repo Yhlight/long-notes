@@ -949,6 +949,11 @@ public class ArbitraryTest {
 #### 关系运算符  
 ==   !=     >    <    >=     <=  
 等于 不等于 大于 小于 大于等 小于等  
+Java中，=是赋值，==才是等于  
+
+#### 条件运算符
+(条件表达式)?表达式1:表达式2  
+条件表达式如果是true，运算结果是表达式1，否则是2  
 
 #### 综合练习
 输出某个三位数的个，十，百位  
@@ -973,6 +978,261 @@ public class AirExer {
         int day = num / 24;
         int hour = num % 24;
         System.out.println(day + "天" + hour + "小时");
+    }
+}
+```
+
+## 第二章 流程控制
+流程控制语句是用来控制程序中各语句执行顺序的语句，可以把语句组合成能完成一定功能的小逻辑模块  
+程序设计中规定了三种流程结构  
+- 顺序结构  
+从上往下逐个执行，中间没有判断和条状  
+- 分支结构  
+选择性执行某段语句  
+- 循环语句  
+循环执行某段代码  
+
+### 分支语句
+**关键词：if,else,else if**  
+```
+        if (条件表达式) {
+            代码块;
+        } else if (条件表达式) {
+            代码块;
+        } else if (条件表达式) {
+            代码块;
+        } else {
+            代码块;
+        }
+```
+**else if**通常在需要多分支时使用  
+除了**if**可以独立外，其他语句都无法脱离**if**使用  
+
+#### if，else，else if的使用
+if，else if存在着判断条件，如果判断条件成立，执行这一段代码块，其他则是不执行，起到分支的作用  
+
+如果if语句条件成立，那么else if和else都不执行  
+如果if不成立，else if成立，执行else if，其他不执行  
+如果if和多个else if都不成立，执行else  
+实际例子：（这里为了方便提前用了Scanner类）
+成年人心率的正常范围是每分钟60-100次，体检时  
+如果心率不在此范围内，则需要进一步检查  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        Scanner scan = new Scanner(System.in);
+        i = scan.nextInt();
+        if (i >= 60 && i <= 100) {
+            System.out.println("情况正常");
+        } else if (i < 30 || i > 130) {
+            System.out.println("？您？");
+        } else {
+            System.out.println("莫得惊艳点");
+        }
+    }
+}
+```
+上述代码中，if-else结构需要执行的语句就一句，你可以省略大括号  
+```
+        if (i >= 60 && i <= 100)
+            System.out.println("情况正常");
+        else if (i < 30 || i > 130)
+            System.out.println("？您？");
+        else
+            System.out.println("莫得惊艳点");
+```
+我个人建议是加上大括号，除非你这个结构是绝对不会进行更改  
+并且只是简单的逻辑判定，没有用在很复杂的结构  
+if-else的匹配是就近原则，只有在使用大括号时才允许忽略就近原则  
+就近原则就是else默认匹配最近的if  
+
+在多分支选择中 有可能会出现中间值  
+按照日常使用 我们会下意识使用  
+d <= xx < k  
+这种表达是不得当的  
+为什么？  
+<=和<都是二元操作符，也就是只能两个间运算  
+d <= xx已经进行了运算，返回了一个boolean值用来表示是与否  
+这时候表达式就变成boolean < k，Java不允许boolean值与整型运算  
+正确表达应该是  
+xx >= d && xx < k  //&& 并  
+（与C语言不同，C语言是返回常量）  
+
+##### 嵌套使用
+首先要牢记的前提是  
+除了**if**可以独立外，其他语句都无法脱离**if**使用  
+在这里前提下，你可以任意加入if-else结构  
+可以在if中加入if，也可以在else if和else中加入if    
+以一道简单的题目来举例  
+输入三个整数，给他们排序  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int num1 = 0;
+        int num2 = 0;
+        int num3 = 0;
+        int tmp = 0;
+        Scanner scan = new Scanner(System.in);
+        num1 = scan.nextInt();
+        num2 = scan.nextInt();
+        num3 = scan.nextInt();
+        if (num1 > num2) {
+            tmp = num1;
+            num1 = num2;
+            num2 = tmp;
+            if (num1 > num3) {
+                tmp = num1;
+                num1 = num3;
+                num3 = tmp;
+                if (num2 > num3) {
+                    tmp = num2;
+                    num2 = num3;
+                    num3 = tmp;
+                }
+            }
+        }
+        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
+    }
+}
+```
+实际上，没必要用嵌套的  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int num1 = 0;
+        int num2 = 0;
+        int num3 = 0;
+        int tmp = 0;
+        Scanner scan = new Scanner(System.in);
+        num1 = scan.nextInt();
+        num2 = scan.nextInt();
+        num3 = scan.nextInt();
+        if (num1 > num2) {
+            tmp = num1;
+            num1 = num2;
+            num2 = tmp;
+        }
+        if (num1 > num3) {
+            tmp = num1;
+            num1 = num3;
+            num3 = tmp;
+        }
+        if (num2 > num3) {
+            tmp = num2;
+            num2 = num3;
+            num3 = tmp;
+        }
+        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
+    }
+}
+```
+在实际开发中，是不会出现超过三层的if-else结构，如果超过了，建议对代码进行更改  
+
+## Scanner类
+Scanner是官方提供的一个类，用来获取和解析用户输入的数据  
+你可以通过Scanner来获取键盘的输入  
+
+### 如何使用Scanner
+**导入包**  
+`import java.util.Scanner;`  
+在文件的开头书写，导入Scanner包  
+
+**创建类实例**  
+`Scanner 变量名 = new Scanner(System.in);`
+
+**调用类方法**  
+如果你需要接收一个字符串，你可以使用next()或nextLine()  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        String str1 = "荧火light";
+        Scanner scan = new Scanner(System.in);
+        str1 = scan.next();
+        //str1 = scan.nextLine();
+    }
+}
+```
+next()和nextLine()的区别  
+next()方法用于读取下一个“标记”，空格，制表符，换行符是常见的标记  
+它会返回下一个有效字符，直到遇到空格  
+什么意思？  
+"  Hello World"，调用next()将返回"Hello"，下一次调用将返回"World"  
+就是next()会忽略开头的空白字符，并从第一个非空白字符开始读取，直到下一个空白字符为止  
+
+nextLine()方法用于读取整行输入，包括空格，直到遇到换行符为止  
+它会返回读取到的整行字符串，除了换行符  
+"Hello World"，调用nextLine()将返回"Hello World"  
+
+如果你需要接收一个整型或浮点型，你需要用相应的关键词  
+你可以在[JAVA API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)文档中查阅使用什么关键字  
+这里简单举个例子：   
+``` 
+Scanner 变量名1 = new Scanner(System.in);
+int 变量名2 = 变量名1.nextInt();
+double 变量名2 = 变量名.1nextDouble();
+boolean 变量名2 = 变量名1.nextBoolean();
+//没有nextChar，如果要接收char，用next().charAt(0);
+```
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int scanTest = 0;
+        Scanner scan = new Scanner(System.in);
+        scanTest = scan.nextInt();
+        scan.close();
+    }
+}
+```
+**关闭资源**  
+`变量名.close();`
+Scanner输入流所输入的内容在运行中是不关闭的  
+这可能会造成内存泄漏，在不需要使用Scanner时，建议关闭它  
+
+### 如何获取随机数
+随机数的使用是不可缺少的，在Java中可以通过Math类来生成随机数  
+`double 变量名 = Math.random();`
+random调用会返回一个[0.0,1.0)范围的double类型的随机数  
+我查阅了JDK 23的API文档，这一句是Math类提供的唯一一条与随机数有关的语句  
+如果你不想使用Math类，也可以使用Random类[java.util.Random](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/Random.html#%3Cinit%3E())  
+
+使用Math类生成随机数需要变通一下  
+例如：生成0-100范围的整型随机数  
+`int randomNum = (int) (Math.random() * 101);`
+应该能够理解为什么*101能够得出0-100的范围吧  
+random调用会返回一个[0.0,1.0)范围的double类型的随机数  
+*101就是[0.0,101.0)，转成int类型就是[0,100]，因为101取不到啊  
+
+获取[a,b]范围的通用公式  
+`int 变量名 = (int) (Math.random() * (b - a + 1) + a);`
+
+#### 使用Random类生成随机数
+```
+Random 变量名1 = new Random();
+//括号写范围，只能写一个数字，写10就是生成[0,10)范围的整型数
+int 变量名2 = 变量名1.nextInt();
+double 变量名2 = 变量名1.nextDouble()
+boolean 变量名2 = 变量名1.nextBoolean()
+```
+实例：生成[-100,100]的数  
+```
+import java.util.Random;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        Random randomNum = new Random();
+        int randomNumNest = (randomNum.nextInt(201) - 100);
+        System.out.println(randomNumNest);
     }
 }
 ```
