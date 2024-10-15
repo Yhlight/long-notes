@@ -1178,41 +1178,9 @@ xx >= d && xx < k  //&& 并
 除了**if**可以独立外，其他语句都无法脱离**if**使用  
 在这里前提下，你可以任意加入if-else结构  
 可以在if中加入if，也可以在else if和else中加入if    
-以一道简单的题目来举例  
-输入三个整数，给他们排序  
-```
-import java.util.Scanner;
 
-public class ArbitraryTest {
-    public static void main(String[] args) {
-        int num1 = 0;
-        int num2 = 0;
-        int num3 = 0;
-        int tmp = 0;
-        Scanner scan = new Scanner(System.in);
-        num1 = scan.nextInt();
-        num2 = scan.nextInt();
-        num3 = scan.nextInt();
-        if (num1 < num2) {
-            tmp = num1;
-            num1 = num2;
-            num2 = tmp;
-            if (num1 < num3) {
-                tmp = num1;
-                num1 = num3;
-                num3 = tmp;
-                if (num2 < num3) {
-                    tmp = num2;
-                    num2 = num3;
-                    num3 = tmp;
-                }
-            }
-        }
-        System.out.println("num1=" + num1 + " num2=" + num2 + " num3=" + num3);
-    }
-}
-```
-实际上，没必要用嵌套的  
+来做道题  
+输入三个整数，给他们排序  
 ```
 import java.util.Scanner;
 
@@ -1245,6 +1213,8 @@ public class ArbitraryTest {
     }
 }
 ```
+这里我不打算使用嵌套，这道题嵌套写起来其实是比较麻烦的  
+我选择更有简洁性的多if语句，尽管效率未必有if-else高  
 在实际开发中，是不会出现超过三层的if-else结构，如果超过了，建议对代码进行更改  
 
 #### switch-case结构
@@ -1311,6 +1281,66 @@ public class ArbitraryTest {
 **break**可以终止switch语句，**case**相当于switch的入口，决定switch从哪里开始  
 而**break**则是出口，决定从哪里跳出switch，**break**语句并不是必要的  
 你可以不添加**break**以此来输出多个分支结果  
+switch语句的效率是比if-self要高的，可以选择性使用  
+
+##### switch综合练习
+不允许使用if-self结构，使用switch结构来实现以下功能  
+1. 允许自由输入数据  
+2. 若数据大于60，打印达标，若低于60，打印不合格  
+```
+import java.util.Scanner;
+
+//方法1
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        Scanner scan = new Scanner(System.in);
+        input = scan.nextInt();
+        scan.close();
+        switch (input / 10) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                System.out.println("不合格");
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                System.out.println("达标");
+                break;
+            default:
+                System.out.println("成绩出错");
+        }
+    }
+}
+```
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        Scanner scan = new Scanner(System.in);
+        input = scan.nextInt();
+        scan.close();
+        switch (input / 60) {
+            case 0:
+                System.out.println("不合格");
+                break;
+            case 1:
+                System.out.println("达标");
+                break;
+            default:
+                System.out.println("成绩出错");
+        }
+    }
+}
+```
 
 ### 循环语句
 关键词：for，while，do...while  
@@ -1349,6 +1379,20 @@ for循环进行流程是这样的
 你可以省略初始化部分，也能省略判断条件，三个都省略也是能运行的  
 知道就行，实战还是别乱拿来耍  
 
+#### while循环
+```     初始部分;
+        while (循环条件) {
+            代码块;
+            调整部分;
+        }
+```
+
+在循环结构中，也可以使用**break**语句  
+可以用来跳出循环  
+除了**break**语句外，还有**continue**语句  
+与**break**语句不同，**break**是永久终止循环  
+而**continue**是跳过自身后面的代码，直接进入判断部分  
+
 来做道题  
 输出1-100间所有偶数的和，同时输出偶数个数  
 ```
@@ -1365,6 +1409,328 @@ public class ArbitraryTest {
             }
         }
         System.out.println("偶数之和为" + sum + " 偶数个数为" + count);
+    }
+}
+```
+
+##### 循环结构综合练习
+1.输出所有水仙花数，水仙花数是一个三位数，其各个位上数字立方和等于其本身  
+```
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        for (i = 100; i < 1000; i++) {
+            if (i == (i / 100) * (i / 100) * (i / 100)
+                    + ((i / 10) % 10) * ((i / 10) % 10) * ((i / 10) % 10)
+                    + (i % 10) * (i % 10) * (i % 10)) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
+```
+我个人建议创建三个变量来做这道题，就不要像我这样做  
+
+2.输入两个正整数，求最大公约数和最小公倍数   
+最大公约数   
+```
+import java.util.Scanner;
+
+//方法1
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int m = 0;
+        int n = 0;
+        Scanner scan = new Scanner(System.in);
+        m = scan.nextInt();
+        n = scan.nextInt();
+        int min = (m < n) ? m : n;
+        scan.close();
+
+        int result = 1;
+        for (int i = 1; i <= min; i++) {
+            if (m % i == 0 && n % i == 0) {
+                result = i;
+            }
+        }
+        System.out.println(result);
+    }
+}
+```
+```
+import java.util.Scanner;
+
+//方法2
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int m = 0;
+        int n = 0;
+        Scanner scan = new Scanner(System.in);
+        m = scan.nextInt();
+        n = scan.nextInt();
+        int min = (m < n) ? m : n;
+        scan.close();
+
+        for (int i = min; i > 0; i--) {
+            if (m % i == 0 && n % i == 0) {
+                System.out.println(i);
+                break;
+            }
+        }
+    }
+}
+```
+```
+import java.util.Scanner;
+
+//while循环做法
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int m = 0;
+        int n = 0;
+        Scanner scan = new Scanner(System.in);
+        m = scan.nextInt();
+        n = scan.nextInt();
+        scan.close();
+
+        if (n == 0)
+        {
+            System.out.println(m);
+        }
+
+        while (n != 0) {
+            int invoke = n;
+            n = m % n;
+            m = invoke;
+        }
+        System.out.println(m);
+    }
+}
+```
+其实这三个例子都只是实现了功能，并没有进行一定的处理  
+例如两个数都为0，或者任一为0的情况，感兴趣自己去想想怎么优化  
+
+最小公倍数（不考虑0的情况，因为懒）  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int m = 0;
+        int n = 0;
+        Scanner scan = new Scanner(System.in);
+        m = scan.nextInt();
+        n = scan.nextInt();
+        scan.close();
+        int ret = m * n;
+
+        if (n == 0) {
+            System.out.println(m);
+        }
+
+        while (n != 0) {
+            int invoke = n;
+            n = m % n;
+            m = invoke;
+        }
+        System.out.println("最大公约数为" + m);
+        System.out.println("最小公倍数为" + ret / m);
+    }
+}
+```
+3.猜数字游戏  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        int randomNum = (int) (Math.random() * 101);
+        System.out.println("猜猜数字>[0,100]");
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.print("请输入一个数字>");
+            input = scan.nextInt();
+
+            if (input == randomNum) {
+                System.out.println("猜对了");
+                break;
+            }
+
+            if (input > randomNum) {
+                System.out.println("猜大了");
+            }
+
+            if (input < randomNum) {
+                System.out.println("猜小了");
+            }
+
+        }
+        scan.close();
+    }
+}
+```
+如果你想要更高的效率，你要改用if-else结构  
+多if语句效率是没有if-self结构高的  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        int randomNum = (int) (Math.random() * 101);
+        System.out.println("猜猜数字>[0,100]");
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.print("请输入一个数字>");
+            input = scan.nextInt();
+
+            if (input > randomNum) {
+                System.out.println("猜大了");
+            } else if (input < randomNum) {
+                System.out.println("猜小了");
+            } else {
+                System.out.println("猜对了");
+                break;
+            }
+        }
+        scan.close();
+    }
+}
+```
+
+#### do...while循环
+```
+        初始部分
+        do {
+            代码块;
+            调整部分;
+        } while (循环条件);
+```
+do...while循环执行过程：  
+初始部分->调整部分->循环条件->满足条件->调整部分->循环条件->不满足条件->不进入循环  
+do...while循环就是先进行一次再循环  
+
+使用do...while结构做一个简单的ATM  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int input = 0;
+        double money = 0;
+        double hasMoney = 0;
+        double carryMoney = 0;
+        Scanner scan = new Scanner(System.in);
+        System.out.print("请设定你所有的金额>");
+        hasMoney = scan.nextDouble();
+        System.out.println("设定成功，你现在拥有" + hasMoney + "金额" + "\n");
+        do {
+            System.out.println("1.存款");
+            System.out.println("2.取款");
+            System.out.println("3.显示余额");
+            System.out.println("0.退出");
+            System.out.print("请选择>");
+            input = scan.nextInt();
+
+            switch (input) {
+                case 1:
+                    System.out.print("存入多少金额>");
+                    money = scan.nextDouble();
+                    if (money > hasMoney) {
+                        System.out.println("余额不够" + "\n");
+                    } else {
+                    //else if (money <= hasMoney)
+                        hasMoney -= money;
+                        System.out.println("存入成功，你现在账户余额为" + money);
+                        System.out.println("你现在持有" + hasMoney + "金额" + "\n");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("账户余额为" + money);
+                    System.out.print("取出多少金额>");
+                    carryMoney = scan.nextDouble();
+                    if (carryMoney > money) {
+                        System.out.println("账户余额不够" + "\n");
+                    } else {
+                    //else if (carryMoney <= money)
+                        money -= carryMoney;
+                        hasMoney = hasMoney + carryMoney;
+                        System.out.println("取出成功，你现在账户余额为" + money);
+                        System.out.println("你现在持有" + hasMoney + "金额" + "\n");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("账户余额为" + money + "\n");
+                    break;
+
+                case 0:
+                    System.out.println("已退出ATM机");
+                    break;
+            }
+
+        } while (input != 0);
+        scan.close();
+    }
+}
+```
+这里留了一个扩展点，我留下了else if分支，你可以利用else分支去实现一些缺少的功能，如，检测输入是否正确  
+
+#### “无限”循环
+典型的无限循环结构有`while(true)`和`for(;;)`  
+“无限”循环常用于不知道循环多少次，依靠循环内部的条件来结束的场景  
+
+使用嵌套循环输出棱形  
+```
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+```
+输出一个这样的棱形  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int i = 0;
+        int line = 0;
+        Scanner scan = new Scanner(System.in);
+        line = scan.nextInt();
+        scan.close();  //我认为没有必要再使用Scanner
+
+        for (i = 0; i < line; i++) {
+            int j = 0;
+            for (j = 0; j < line - 1 - i; j++) {
+                System.out.print(" ");
+            }
+
+            for (j = 0; j < 2 * i + 1; j++) {
+                System.out.print("*");
+            }
+
+            System.out.print("\n");
+        }
+
+        for (i = 0; i < line - 1; i++) {
+            int j = 0;
+            for (j = 0; j <= i; j++) {
+                System.out.print(" ");
+            }
+
+            for (j = 0; j < 2 * (line - 1 - i) - 1; j++) {
+                System.out.print("*");
+            }
+
+            System.out.print("\n");
+        }
     }
 }
 ```
