@@ -185,7 +185,7 @@ java HelloChina
 运行需要输入类的名字（要完全相同），而不是文件名字  
 明显，这繁琐许多，同时，不仅仅是这些问题，这里进行相关的一些解析  
 1. public类一致性需求  
-你可以看到，上面的代码是class + 类名，然而，在Java中，更多使用的是public class + 类名  
+你可以看到，上面的代码是class + 类名，然而，在Java中，还会使用public class + 类名  
 在Java中规定，public class 的**类名**要和**文件名**完全相同  
 
 2. 组织性，IDE支持，避免冲突等的需求  
@@ -384,7 +384,7 @@ Java中变量、方法、类等要素命名时使用的字符序列，称为标�
 #### 定义变量的细则和规范
 变量：内存中的一个存储区域，该区域的数据可以在同一类型范围内不断变化  
 变量的三个要素：数据类型，变量名，存储的值  
-变量的声明：数据类型 变量名 = 变量值  
+变量的声明：`数据类型 变量名 = 变量值`  
 变量的意义：给一段指定的内存起名，方便操作这段内存  
 
 局部变量：方法内部定义的变量  
@@ -963,7 +963,7 @@ Java中，=是赋值，==才是等于
 `(条件表达式)?表达式1:表达式2`  
 条件表达式如果是true，运算结果是表达式1，否则是2  
 
-#### 综合练习
+#### 运算符综合练习
 输出某个三位数的个，十，百位  
 ```
 public class AirExer {
@@ -1624,7 +1624,7 @@ public class ArbitraryTest {
         Scanner scan = new Scanner(System.in);
         System.out.print("请设定你所有的金额>");
         hasMoney = scan.nextDouble();
-        System.out.println("设定成功，你现在拥有" + hasMoney + "金额" + "\n");
+        System.out.println("设定成功，你现在拥有" + hasMoney + "金额\n");
         do {
             System.out.println("1.存款");
             System.out.println("2.取款");
@@ -1638,12 +1638,12 @@ public class ArbitraryTest {
                     System.out.print("存入多少金额>");
                     money = scan.nextDouble();
                     if (money > hasMoney) {
-                        System.out.println("余额不够" + "\n");
+                        System.out.println("余额不够\n");
                     } else {
                     //else if (money <= hasMoney)
                         hasMoney -= money;
                         System.out.println("存入成功，你现在账户余额为" + money);
-                        System.out.println("你现在持有" + hasMoney + "金额" + "\n");
+                        System.out.println("你现在持有" + hasMoney + "金额\n");
                     }
                     break;
 
@@ -1652,13 +1652,13 @@ public class ArbitraryTest {
                     System.out.print("取出多少金额>");
                     carryMoney = scan.nextDouble();
                     if (carryMoney > money) {
-                        System.out.println("账户余额不够" + "\n");
+                        System.out.println("账户余额不够\n");
                     } else {
                     //else if (carryMoney <= money)
                         money -= carryMoney;
                         hasMoney = hasMoney + carryMoney;
                         System.out.println("取出成功，你现在账户余额为" + money);
-                        System.out.println("你现在持有" + hasMoney + "金额" + "\n");
+                        System.out.println("你现在持有" + hasMoney + "金额\n");
                     }
                     break;
 
@@ -1682,6 +1682,7 @@ public class ArbitraryTest {
 典型的无限循环结构有`while(true)`和`for(;;)`  
 “无限”循环常用于不知道循环多少次，依靠循环内部的条件来结束的场景  
 
+#### 循环的练习
 使用嵌套循环输出棱形  
 ```
     *
@@ -1734,3 +1735,685 @@ public class ArbitraryTest {
     }
 }
 ```
+
+打印9*9乘法表  
+```
+public class ArbitraryTest {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 9; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(i + " * " + j + " = " + i * j + "  ");
+            }
+
+            System.out.print("\n");
+        }
+    }
+}
+```
+
+打印素数  
+```
+import java.util.Scanner;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        int num = 0;
+        Scanner scan = new Scanner(System.in);
+        num = scan.nextInt();
+        scan.close();
+
+        for (int i = 2; i <= num; i++) {
+
+            int j = 0;
+            boolean flag = true;
+            for (j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
+```
+## 时间锥的应用
+如何知道代码运行的时间呢？  
+可以借助时间锥[currentTimeMillis](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/System.html#currentTimeMillis())，时间锥的单位是毫秒  
+```
+import static java.lang.System.currentTimeMillis;
+
+long 变量名1 = currentTimeMillis()
+
+long 变量名2 = currentTimeMillis()
+```
+```
+import java.util.Scanner;
+import static java.lang.System.currentTimeMillis;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        long start = currentTimeMillis();
+
+        int num = 0;
+        Scanner scan = new Scanner(System.in);
+        num = scan.nextInt();
+        scan.close();
+
+        for (int i = 2; i <= num; i++) {
+
+            int j = 0;
+            boolean flag = true;
+            for (j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.print(i + " ");
+            }
+        }
+
+        long end = currentTimeMillis();
+        System.out.println(end-start);
+    }
+}
+```
+获取代码的运算时间是为了优化算法，寻求更高的运行效率，下面是改进了算法的求质数代码，你可以自行比较一下它们的运行时间  
+```
+import java.util.Scanner;
+import static java.lang.System.currentTimeMillis;
+
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        long start = currentTimeMillis();
+
+        int num = 0;
+        Scanner scan = new Scanner(System.in);
+        num = scan.nextInt();
+        scan.close();
+
+        for (int i = 2; i <= num; i++) {
+
+            int j = 0;
+            boolean flag = true;
+            for (j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                System.out.print(i + " ");
+            }
+        }
+
+        long end = currentTimeMillis();
+        System.out.println(end - start);
+    }
+}
+```
+初步实战-谷粒记账软件  
+GuLiAccount.java  
+```
+public class GuLiAccount {
+    public static void main(String[] args) {
+        int hasMoney = 10000;
+        boolean isFlag = true;
+        String info = "";
+        do {
+            System.out.println("\n-----------------谷粒记账软件-----------------\n");
+            System.out.println("                 1 收支明细");
+            System.out.println("                 2 登记收入");
+            System.out.println("                 3 登记支出");
+            System.out.println("                 4 退   出\n");
+            System.out.print("                 请选择>");
+
+            char selection = Utility.readMenuSelection();
+            switch (selection) {
+                case '1':
+                    System.out.println("------------------收支明细-------------------");
+                    System.out.println("收支\t\t账户金额\t\t收支金额\t\t说明");
+                    System.out.println(info);
+                    System.out.println("-------------------------------------------");
+                    break;
+                case '2':
+                    System.out.print("本次收入金额>");
+                    int money1 = Utility.readNumber();
+
+                    if (money1 > 0) {
+                        hasMoney += money1;
+                    }
+
+                    System.out.print("本次收入说明>");
+                    String addDesc = Utility.readString();
+                    info += "收入\t\t" + hasMoney + "\t\t" + money1 + "\t\t    " + addDesc + "\n";
+                    System.out.println("------------------登记完成-------------------");
+                    break;
+                case '3':
+                    System.out.print("本次支出金额>");
+                    int money2 = Utility.readNumber();
+
+                    if (money2 > 0 && hasMoney > money2) {
+                        hasMoney -= money2;
+                    }
+
+                    System.out.print("本次支出说明>");
+                    String minusDesc = Utility.readString();
+                    info += "支出\t\t" + hasMoney + "\t\t" + money2 + "\t\t    " + minusDesc + "\n";
+                    System.out.println("------------------登记完成-------------------");
+                    break;
+                case '4':
+                    System.out.print("是否退出(Y/N)>");
+                    char isExit = Utility.readConfirmSelection();
+                    if (isExit == 'Y') {
+                        isFlag = false;
+                    }
+                    break;
+            }
+        } while (isFlag);
+    }
+}
+```
+Utility.java  
+```
+import java.util.Scanner;
+
+public class Utility {
+    private static Scanner scan = new Scanner(System.in);
+
+    public static char readMenuSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1);
+            c = str.charAt(0);
+            if (c != '1' && c != '2' && c != '3' && c != '4') {
+                System.out.print("选择错误，请重新输入>");
+            } else break;
+        }
+        return c;
+    }
+
+    public static int readNumber() {
+        int n;
+        for (; ; ) {
+            String str = readKeyBoard(4);
+            try {
+                n = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("数字输入错误，请重新输入>");
+            }
+        }
+        return n;
+    }
+
+    public static String readString() {
+        String str = readKeyBoard(8);
+        return str;
+    }
+
+    public static char readConfirmSelection() {
+        char c;
+        for (; ; ) {
+            String str = readKeyBoard(1).toUpperCase();
+            c = str.charAt(0);
+            if (c == 'Y' || c == 'N') {
+                break;
+            } else {
+                System.out.print("选择错误，请重新输入>");
+            }
+        }
+        return c;
+    }
+    
+    private static String readKeyBoard(int limit) {
+        String line = "";
+
+        while (scan.hasNext()) {
+            line = scan.nextLine();
+            if (line.length() < 1 || line.length() > limit) {
+                System.out.print("输入错误，请重新输入>");
+                continue;
+            }
+            break;
+        }
+
+        return line;
+    }
+}
+```
+你可以对其进行改造，这一次我就不作示范了  
+给大家自由实践的机会  
+
+## 数组
+数组是多个相同类型数据按照一定顺序排序的集合  
+并用一个名字命名，并通过编号的方式对这些数据进行统一的管理  
+数组的初始化有多种形式  
+```
+int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int[] a = new int[]{1, 2, 3, 4, 5};
+
+int[] a = new int[4];
+int a[] = new int[4];
+```
+数组中有着几个概念，分别是数组名，元素，下标，长度  
+拿int[] a = new int[]{1, 2, 3, 4, 5};进行举例  
+a是数组名，1，2，3，4，5是元素  
+a[0]代表的就是元素1，a[0]相当于数组第一位，[0]是下标  
+长度就是数组的容量，多少个元素就是多长，想要打印长度可以使用`System.out.println(a.length)`  
+
+数组自身的特性说明了数组在内存中是连续存放的，因而各个元素之间相差的地址大小总是相等的  
+
+数组它是一组数据，常规的打印显然是不适合  
+我们需要使用循环来打印所有的元素  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[] a = {1, 2, 3, 4, 5};
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
+    }
+}
+```
+上述都是进行了初始化，如果不进行初始化，会得出什么结果？  
+数组的默认初始化值是多少呢？  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[] a = new int[4];
+        double[] b = new double[4];
+        char[] c = new char[4];
+        String[] d = new String[4];
+        boolean[] e = new boolean[4];
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+            System.out.print(b[i] + " ");
+            System.out.print(c[i] + " ");
+            System.out.print(d[i] + " ");
+            System.out.print(e[i] + "\n");
+        }
+    }
+}
+```
+说结论，整型和浮点型默认值都是0，字符型是空字符，String类是null，布尔类型是false  
+
+### 一维数组的内存解析
+Java将内存划分为五块，程序计数器，虚拟机栈，本地方法栈，堆，方法区  
+
+目前与数组相关的内存结构是虚拟机栈和堆  
+虚拟机栈：用于存放方法中声明的变量  
+堆：用来存放数组中的元素（实体）  
+
+如果有人学过C语言或C++，或者学过数据结构，那么基本听说过栈  
+栈区的存放特点是先进后出，好比如说  
+```
+[]  （第一个取出）  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  （第一个存放）  
+```
+我们以两个例子来说明  
+```
+int[] arr1 = new int[4];
+arr1[0] = 10;
+arr1[2] = 20;
+
+String[] arr2 = new String[2];
+arr2[1] = "荧火光";
+```
+上面说过栈区是存放变量的，也就是数组名  
+```
+[]  （第一个取出）  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[]  
+[arr2：0xaabb]  
+[arr1：0x12ab]  （第一个存放）  
+```
+栈区存放的数组名，其实本质是存放地址的首元素地址  
+我们所创建的变量，方法，在栈区中都是以地址的形式存在  
+数组的连续性存放使得我们能够凭借首元素地址便可以直接访问所有元素  
+
+同时，我们知道，数据在内存中的存储方式是补码，这就意味着我们需要将内容进行转换  
+像String这种字符串，同样需要被转换，不同的是，它们还需要放进常量池中  
+在Java中，字符串都要被存放进常量池，这些字符串被认为成常量  
+当有变量指向相同的字符串时，它们本质上都指向了这个字符串的地址，没有再一次开辟新的空间  
+然而，仅仅只有字符串是这样的，数据常量依旧需要开辟空间  
+暂且知道这些就足够了，后续面向对象会深入了解  
+
+#### 两个变量指向一个数组
+先来看一段代码  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[] arr = new int[4];
+        arr[0] = 5;
+        arr[1] = 6;
+        arr[2] = 7;
+
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+        System.out.println();
+
+        int[] arr1 = arr;  //将arr的地址赋给了arr1
+        arr1[1] = 9;
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+    }
+}
+```
+上述代码中，实现了类似C/C++语言中的指针操作，将数组arr的地址赋给了arr1，这两个变量指向了同一个地址，对arr1操作，相当于操作arr，这个操作不需要开辟新的内存空间  
+
+### 一维数组练习
+1. 翻译手机号码  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[] arr = {8, 2, 1, 0, 3};
+        int[] index = {2, 0, 3, 2, 4, 0, 1, 3, 2, 3, 3};  //11
+        String tel = "";
+
+        for (int i = 0; i < index.length; i++) {
+            int value = index[i];
+            tel += arr[value];
+            //1 8 0 1 3 8 2 0 1 0 0
+        }
+
+        System.out.println("联系方式 " + tel);
+    }
+}
+```
+2. 输入1-7，打印星期X  
+```
+import java.util.Scanner;
+
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int input = 0;
+        String[] arr = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            input = scan.nextInt();
+            if (input >= 1 && input <= 7) {
+                System.out.println(arr[input - 1]);
+                break;
+            } else {
+                System.out.println("输入错误，请重新输入");
+            }
+        }
+        scan.close();
+    }
+}
+//这里做了简单的判断，要处理除整型外的是有一些复杂的，平时练习没有那个必要
+```
+3. 输入学生人数以及成绩，找出最高分，并进行等级划分，等级依据最高分来取（例如，最高分-10，最高分-20等）  
+```
+import java.util.Scanner;
+
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("请输入学生人数>");
+        int count = scan.nextInt();
+        int[] scores = new int[count];
+        System.out.println("请依次输入学生成绩>");
+
+        int i = 0;
+        int max = scores[0];
+        for (i = 0; i < scores.length; i++) {
+            scores[i] = scan.nextInt();
+
+            if (max <= scores[i]) {
+                max = scores[i];
+            }
+        }
+        System.out.println("最高分>" + max);
+
+        for (i = 0; i < scores.length; i++) {
+            if (scores[i] >= max - 10) {
+                System.out.println("学生" + i + " 分数为" + scores[i] + " 等级A");
+            } else if (scores[i] >= max - 20) {
+                System.out.println("学生" + i + " 分数为" + scores[i] + " 等级B");
+            } else if (scores[i] >= max - 30) {
+                System.out.println("学生" + i + " 分数为" + scores[i] + " 等级C");
+            } else {
+                System.out.println("学生" + i + " 分数为" + scores[i] + " 等级D");
+            }
+        }
+        scan.close();
+    }
+}
+```
+可以去写一个输入学生名的，例如：  
+```
+import java.util.Scanner;
+
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int i = 0;
+
+        System.out.print("请输入学生人数>");
+        int count = scan.nextInt();
+        scan.nextLine();  //清除缓冲区
+
+        String[] nameLine = new String[count];
+        System.out.println("请依次输入学生名字>");
+
+        for (i = 0; i < nameLine.length; i++) {
+            nameLine[i] = scan.nextLine();
+        }
+
+        int[] scores = new int[count];
+        System.out.println("请依次输入学生成绩>");
+
+        int max = scores[0];
+        for (i = 0; i < scores.length; i++) {
+            scores[i] = scan.nextInt();
+
+            if (max <= scores[i]) {
+                max = scores[i];
+            }
+        }
+        System.out.println("最高分>" + max);
+
+        char grade = 0;
+        for (i = 0; i < scores.length; i++) {
+            if (scores[i] >= max - 10) {
+                grade = 'A';
+            } else if (scores[i] >= max - 20) {
+                grade = 'B';
+            } else if (scores[i] >= max - 30) {
+                grade = 'C';
+            } else {
+                grade = 'D';
+            }
+            System.out.println("学生" + nameLine[i] + " 分数为" + scores[i] + " 等级" + grade);
+        }
+        scan.close();
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--------------------------------------
+
+## IDEA的使用
+**你可以在这里获取[IDEA](https://www.jetbrains.com/idea/)**  
+本篇章将讲述IDEA的使用  
+
+
+IDEA为我们提供了许多强大的功能，例如：  
+### 快捷输入
+快捷输入mian方法  
+```
+public class ArbitraryTest {
+    main  //输入main后回车
+}
+```
+快捷打印  
+```
+public class ArbitraryTest {
+    public static void main(String[] args) {
+        sout  //输入sout后回车
+        "yhlight".sout  //快捷打印
+    }
+}
+```
+快捷导入包
+```public class ArbitraryTest {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);  //选择报红处ALT+ENTER
+    }
+}
+```
+还提供了一些人性化的设置，你可以自行根据需求进行修改  
+### 设置IDEA
+暂且无法进行更新，图片的上传有限制  
+
+使用上了更加高级的编译器，说明我们已经进入了一个新的阶段  
+在这个阶段中，我们将逐步适应项目化  
+### 初识JAVA项目
+JAVA项目是这样划分的  
+**项目->模块->包->类**  
+项目，包以及类是我们现阶段经常使用的东西，在不久之后我们将经常接触模块  
+一个项目包括一个模块或者多个模块，一个模块包括多个包，一个包里面包括多个类  
+
+#### 模块的创建与包的创建使用
+**在IDEA中我们可以通过左侧项目栏右击项目新建一个模块**  
+**创建好模块之后，你可以在IDEA的文件栏中看到你所创建的模块文件夹**  
+**在模块的目录下面有一个名叫src的文件夹**  
+**JAVA文件应被存放在src文件夹内**  
+**每一个模块是独立又相互联系的，所以模块既可以做到独立运行又可以做到依赖**  
+**现阶段暂不要求学会使用模块**
+
+##### 包的创建
+在创建好模块之后，我们可以正式创建属于我们自己的包，这些包将集成我们所需要实现的功能  
+
+在前边，我们学习过标识符的命名规范，明确表明了包的起名规范  
+**在实际应用中，起名往往是根据公司的域名**  
+例如：  
+```
+com.yhlight.util
+```
+在IDEA中左侧的文件栏里，选择模块中的src文件夹，右键新建软件包，起名为上述格式  
+然后为包创建相应的类文件或将类文件移入包文件夹内  
+这样便已经创建好了你的第一个包，你可以在其他类文件中引用这个包的功能  
+不过这是后日谈了  
+
+有一些人想要直接导入别人的模块，这时候需要怎么做？  
+其实很简单，直接复制整个文件夹过来，然后打开文件栏，打开项目结构，点击加号，然后选择导入模块  
