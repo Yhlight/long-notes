@@ -2047,6 +2047,7 @@ public class ArbitrayTest {
 说结论，整型和浮点型默认值都是0，字符型是空字符，String类是null，布尔类型是false  
 
 ### 一维数组的内存解析
+tmd，指针还在追我  
 Java将内存划分为五块，程序计数器，虚拟机栈，本地方法栈，堆，方法区  
 
 目前与数组相关的内存结构是虚拟机栈和堆  
@@ -2260,9 +2261,143 @@ public class ArbitrayTest {
     }
 }
 ```
+### 二维数组
+二维数组其实是将一维数组作为另一个一维数组的元素，形成的有行列的结构  
 
+#### 二维数组的创建与使用
+```
+int[][] a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+int[][] a = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
 
+int[][] a = new int[4][4];
+int a[][] = new int[4][4];
 
+int[][] a = new int[4][];  //不允许int[][] a = new int[][4]
+//奇奇怪怪，C语言允许省略行，不允许省略列，这边居然是反过来的
+```
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[][] a = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        //上面有三个大括号，也就是3行，每个都有4个元素（不够补默认值），也就是a[3][4]
+        //如何取得元素5？
+        System.out.println(a[1][0]);  //第二行，第一列就是元素5
+        System.out.println(a[1]);
+        //打印的是地址，是这一行的地址，不是首元素地址
+
+        //这是将二维数组分成多个一维数组来看
+        int[][] arr = new int[2][];
+        arr[0] = new int[4];
+        arr[0][0] = 1;
+
+        System.out.println(a.length);  //多少行
+        System.out.println(a[0].length);  //某一行有多少元素
+        System.out.println();
+
+        //如何遍历二维数组？
+        //两个for循环的事情
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+数组中有关类型提升以及相互赋值等问题  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[] arr = new int[10];
+        byte[] arr2 = new byte[20];
+        arr = arr2;
+        //是否允许这一种，答案是不允许
+        //int[]和byte[]是两种不同的引用数据类型
+        int[][] arr3 = new int[3][3];
+        arr = arr3;
+        //是否允许这一种，答案是不允许
+        //int[]和int[][]是两种不同的引用数据类型
+    }
+}
+```
+#### 二维数组的默认值和内存解析
+```
+//二维数组的默认初始化
+
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[][] arr1 = new int[3][3];
+        System.out.println(arr1[0]);  //第一行地址
+        System.out.println(arr1[0][0]);  //0
+        System.out.println();
+
+        int[][] arr2 = new int[3][];
+        System.out.println(arr2[0]);  //null
+        System.out.println(arr2[0][0]);  //报错
+        System.out.println();
+
+        double[][] doubleArr1 = new double[3][3];
+        System.out.println(doubleArr1[0]);  //第一行地址
+        System.out.println(doubleArr1[0][0]);  //0.0
+        System.out.println();
+
+        double[][] doubleArr2 = new double[3][];
+        System.out.println(doubleArr2[0]);  //null
+        System.out.println(doubleArr2[0][0]);  //报错
+        System.out.println();
+
+        char[][] charArr1 = new char[3][3];
+        System.out.println(charArr1[0]);  //第一行地址
+        System.out.println(charArr1[0][0]);  //0
+        System.out.println();
+
+        char[][] charArr2 = new char[3][];
+        System.out.println(charArr2[0]);  //null
+        System.out.println(charArr2[0][0]);  //报错
+        System.out.println();
+
+        String[][] stringArr1 = new String[3][3];
+        System.out.println(stringArr1[0]);  //第一行地址
+        System.out.println(stringArr1[0][0]);  //null
+        System.out.println();
+
+        String[][] stringArr2 = new String[3][];
+        System.out.println(stringArr2[0]);  //null
+        System.out.println(stringArr2[0][0]);  //报错
+        System.out.println();
+
+        boolean[][] booleanArr1 = new boolean[3][3];
+        System.out.println(booleanArr1[0]);  //第一行地址
+        System.out.println(booleanArr1[0][0]);  //false
+        System.out.println();
+
+        boolean[][] booleanArr2 = new boolean[3][];
+        System.out.println(booleanArr2[0]);  //null
+        System.out.println(booleanArr2[0][0]);  //报错
+        System.out.println();
+    }
+}
+```
+你可以看这个图来理解二维数组的内存解析  
+[![pAdiB7t.png](https://s21.ax1x.com/2024/10/21/pAdiB7t.png)](https://imgse.com/i/pAdiB7t)  
+#### 二维数组练习
+1. 求以下数组所有元素总和  
+`int[][] arr = new int[][]{{3, 5, 8, 0}, {12, 9, 0, 0}, {7, 0, 6, 4}};`  
+```
+public class ArbitrayTest {
+    public static void main(String[] args) {
+        int[][] arr = new int[][]{{3, 5, 8, 0}, {12, 9, 0, 0}, {7, 0, 6, 4}};
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                sum += arr[i][j];
+            }
+        }
+        System.out.println(sum);
+    }
+}
+```
 
 
 
